@@ -1,0 +1,82 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>
+                    <a routerLink="/dashboard"
+                        ><img
+                            src="../../../assets/logo.svg"
+                            alt=""
+                            class="logo-img"
+                    /></a>
+                </h1>
+            </div>
+            <div class="col text-right">
+                <div class="btn-group" dropdown>
+                    <div dropdownToggle class="profile-pic">
+                        <img src="../../../assets/300_21.jpg" alt="" />
+                    </div>
+                    <div
+                        id="dropdown-basic"
+                        *dropdownMenu
+                        class="dropdown-menu"
+                        role="menu"
+                        aria-labelledby="button-basic"
+                    >
+                        <div class="profile-dropdown-detail">
+                            <div class="profile-avtar">
+                                <img src="../../../assets/300_21.jpg" alt="" />
+                            </div>
+                            <div class="profile-drop-name">
+                                {{authSerive.getToken()}}
+                            </div>
+                            <div class="sign-out">
+                                <span (click)="signOut()">Sign Out</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom mt-5 navbar navbar-dark bg-dark">
+        <div class="container">
+            <ul>
+                <li routerLinkActive="active">
+                    <a routerLink="/admin">Add New User</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/statupdate">Status Update</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/add">Add New</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/projects">Opportunity</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/events">Upcoming Event</a>
+                </li>
+            </ul>
+            <form
+                class="form-inline"
+                [formGroup]="searchForm"
+                (ngSubmit)="onSubmit()"
+            >
+                <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="ClientName"
+                    aria-label="Search"
+                    formControlName="searchText"
+                />
+                <button
+                    class="btn btn-outline-success my-2 my-sm-0"
+                    type="submit"
+                >
+                    Search
+                </button>
+            </form>
+        </div>
+    </div>
+</header>

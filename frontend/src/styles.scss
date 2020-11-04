@@ -1,0 +1,101 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "variables";
+@import "forms";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~open-iconic/font/css/open-iconic-bootstrap.css';
+
+body,
+html,
+div,
+p,
+span,
+article,
+section {
+  font-family: $font-family;
+
+}
+
+html{
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent
+}
+
+body,
+	html {
+    height: 100%;
+    min-height: 100%;
+		margin: 0;
+		padding: 0;
+		font-size: 13px;
+		font-weight: 300;
+		font-family: $font-family;
+		-ms-text-size-adjust: 100%;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale
+	}
+	body a:active,
+	body a:focus,
+	body a:hover,
+	html a:active,
+	html a:focus,
+	html a:hover {
+		text-decoration: none!important
+	}
+	body a,
+	body button,
+	html a,
+	html button {
+		outline: 0!important
+  }
+
+  body{
+    color: #646c9a;
+    position: relative;
+    background: #f9f9fc;
+  }
+  .carousel-indicators li{
+    background-color: #000 !important;
+  }
+  ngb-carousel{
+  &:focus{
+    outline: none;
+  }
+  .carousel-indicators{
+    bottom: -22px;
+    margin-bottom: 0;
+  }
+}
+
+
+// a {
+//   position: relative;
+//   display: inline-block;
+//   color: $btn-primary-color;
+
+//   &:after {
+//     display: block;
+//     content: "";
+//     position: absolute;
+//     bottom: 0;
+//     top: $font-size;
+//     left: 0;
+//     width: 0%;
+//     -webkit-transition: width 0.3s ease;
+//     transition: width 0.3s ease;
+//   }
+
+//   &:hover {
+//     outline: none;
+//     text-decoration: none;
+
+//     &:after {
+//       border-bottom: 1px solid $hoverColor;
+//       opacity: 0.3;
+//       width: 100%;
+//     }
+//   }
+// }

@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="card-columns">
+    <div class="card" *ngFor="let list of lists">
+      <div class="card-body">
+        <h5 class="card-title">Client Name: {{list.clientName}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Opportunity Name: {{list.oppName}} </h6>
+        <a class="card-link">Deal Value: {{list.dealValue}}</a>
+        <a [routerLink]="['/projects/deatil',list._id]" class="card-link text-right">View More</a>
+      </div>
+    </div>
+  </div>
+</div>

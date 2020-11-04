@@ -1,0 +1,66 @@
+.form-group {
+  padding: 0;
+  margin: 0 auto;
+  .form-control {
+    border: none;
+    height: 50px;
+    margin-bottom: 1.25rem;
+    background-color: rgba(247, 247, 249, 0.7);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    -webkit-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}
+
+.errorText {
+  color: $error-red;
+  font-size: ($font-size - 0.1);
+}
+.btn-primary {
+  background-color: $btn-primary-color;
+  border-color: $btn-primary-color;
+  color: #ffffff;
+  &:hover {
+    background-color: $btn-primary-color-hover;
+    border-color: $btn-primary-color-hover;
+  }
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $btn-primary-color;
+  background-color: $btn-primary-color;
+}
+
+form{
+  sup{
+    color: $error-red;
+  }
+  .input-group-text{
+    height: 50px;
+  }
+  .ng-autocomplete{
+    width: 100%;
+.autocomplete-container{
+  box-shadow: none;
+  height: auto;
+  margin-bottom: 1.25rem;
+  .input-container input{
+    border: none;
+    height: 50px;
+
+    background-color: rgba(247, 247, 249, 0.7);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    -webkit-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+  }
+}
+}
+}
+.btn.calendar{
+  height: 50px;
+}

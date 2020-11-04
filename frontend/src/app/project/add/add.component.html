@@ -1,0 +1,255 @@
+<div class="container">
+    <div class="card p-5 col-md-8">
+        <div class="alert alert-success" role="alert" *ngIf="successMssg">
+            New Opportunity is Added
+        </div>
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Client Name<sup>*</sup>:</label>
+                <div class="ng-autocomplete">
+                    <ng-autocomplete
+                        [data]="lists"
+                        [searchKeyword]="clientkeyword"
+                        placeHolder="Client Name"
+                        historyIdentifier="lists"
+                        [itemTemplate]="clintTemplate"
+                        [notFoundTemplate]="notFoundTemplate"
+                        formControlName="clientName"
+                    >
+                    </ng-autocomplete>
+
+                    <ng-template #clintTemplate let-item>
+                        <a [innerHTML]="item.clientName"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Opportunity Name<sup>*</sup>:</label>
+                <div class="ng-autocomplete">
+                    <ng-autocomplete
+                        [data]="lists"
+                        [searchKeyword]="oppkeyword"
+                        placeHolder="Opportunity Name"
+                        historyIdentifier="lists"
+                        [itemTemplate]="oppNameTemplate"
+                        [notFoundTemplate]="notFoundTemplate"
+                        formControlName="oppName"
+                    >
+                    </ng-autocomplete>
+
+                    <ng-template #oppNameTemplate let-item>
+                        <a [innerHTML]="item.oppName"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Deal Value:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Amount (to the nearest dollar)"
+                        formControlName="dealValue"
+                    />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>DX Value:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input
+                        type="text"
+                        class="form-control"
+                        aria-label="Amount (to the nearest dollar)"
+                        formControlName="dxValue"
+                    />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Opportunity Status<sup>*</sup>:</label>
+                <select class="form-control" formControlName="oppStatus">
+                    <option disabled>Select option</option>
+                    <option>RFP Requested</option>
+                    <option>RFP In Progress</option>
+                    <option>Proposal Submitted</option>
+                    <option>Proposal Under Review</option>
+                    <option>SOW Under Review</option>
+                    <option>SOW</option>
+                    <option>Verbal Approval</option>
+                    <option>Won</option>
+                    <option>Business Development</option>
+                    <option>Proposal not shortlisted</option>
+                    <option>Closed</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Vertical/Domain<sup>*</sup>:</label>
+                <select class="form-control" formControlName="domain">
+                    <option disabled>Select option</option>
+                    <option>Financial</option>
+                    <option>Retail</option>
+                    <option>Media</option>
+                    <option>Healthcare</option>
+                    <option>CPG</option>
+                    <option>Travel & Hospitality</option>
+                    <option>Telecom</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Probility:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="probility"
+                        />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Deal Close Date <sup>*</sup>:</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input
+                                    class="form-control"
+                                    formControlName="dealCloseDate"
+                                    placeholder="yyyy-mm-dd"
+                                    name="dcd"
+                                    ngbDatepicker
+                                    #d="ngbDatepicker"
+                                />
+                                <div class="input-group-append">
+                                    <button
+                                        class="btn btn-outline-secondary calendar"
+                                        (click)="d.toggle()"
+                                        type="button"
+                                    >
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Est. Start Date <sup>*</sup>:</label>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input
+                                    class="form-control"
+                                    formControlName="estStartDate"
+                                    placeholder="yyyy-mm-dd"
+                                    name="dp"
+                                    ngbDatepicker
+                                    #dg="ngbDatepicker"
+                                />
+                                <div class="input-group-append">
+                                    <button
+                                        class="btn btn-outline-secondary calendar"
+                                        (click)="dg.toggle()"
+                                        type="button"
+                                    >
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Salesforce URL:</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    formControlName="salesForceURL"
+                />
+            </div>
+
+            <div class="form-group">
+                <label>DX Pursuit Lead<sup>*</sup>:</label>
+                <div class="ng-autocomplete">
+                    <ng-autocomplete
+                        [data]="dxpList"
+                        [searchKeyword]="dxpkeyword"
+                        placeHolder="DX Pursuit Lead"
+                        historyIdentifier="dxpList"
+                        [itemTemplate]="dxpTemplate"
+                        [notFoundTemplate]="notFoundTemplate"
+                        formControlName="dxPursuitLead"
+                    >
+                    </ng-autocomplete>
+
+                    <ng-template #dxpTemplate let-item>
+                        <a [innerHTML]="item.name"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Sales Representative<sup>*</sup>:</label>
+                <div class="ng-autocomplete">
+                    <ng-autocomplete
+                        [data]="lists"
+                        [searchKeyword]="srkeyword"
+                        placeHolder="Sales Representative"
+                        historyIdentifier="lists"
+                        [itemTemplate]="srTemplate"
+                        [notFoundTemplate]="notFoundTemplate"
+                        formControlName="salesRepresentative"
+                    >
+                    </ng-autocomplete>
+
+                    <ng-template #srTemplate let-item>
+                        <a [innerHTML]="item.salesRepresentative"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Status Update:</label>
+                <textarea
+                    class="form-control"
+                    formControlName="statusUpdate"
+                    row="5"
+                ></textarea>
+            </div>
+
+            <div class="form-group text-right mt-5">
+                <button class="btn btn-primary btn-lg" type="submit">
+                    Add
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

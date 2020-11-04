@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="card p-5 col-md-8">
+        <h2 class="mb-5">Adding New User</h2>
+        <div class="alert alert-success mb-3" role="alert" *ngIf="successMssg">
+            User is Added
+        </div>
+
+        <div
+            class="alert alert-danger mb-3"
+            role="alert"
+            *ngIf="successMssg == false"
+        >
+            {{errorMssg}}
+        </div>
+
+        <form [formGroup]="addUser" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-4">
+                <label>Name<sup>*</sup>:</label>
+                <input
+                    type="text"
+                    formControlName="name"
+                    class="form-control mb-0"
+                    placeholder="Name"
+                />
+                <small
+                    *ngIf="f.name.errors && (f.name.dirty || f.name.touched)"
+                >
+                    <div *ngIf="f.name.errors.required">
+                        Name is required
+                    </div>
+                </small>
+            </div>
+            <div class="form-group mb-4">
+                <label>Email<sup>*</sup>:</label>
+                <input
+                    type="email"
+                    formControlName="email"
+                    class="form-control mb-0"
+                    placeholder="email"
+                />
+                <small
+                    *ngIf="f.email.errors && (f.email.dirty || f.email.touched)"
+                >
+                    <div *ngIf="f.email.errors.required">
+                        Email is required
+                    </div>
+                    <div *ngIf="f.email.errors.email">
+                        Email must be a valid email address
+                    </div>
+                </small>
+            </div>
+            <div class="form-group mb-4">
+                <label>Password<sup>*</sup>:</label>
+                <input
+                    type="password"
+                    formControlName="password"
+                    class="form-control mb-0"
+                    placeholder="Password"
+                />
+                <small
+                    *ngIf="f.password.errors && (f.password.dirty || f.password.touched)"
+                >
+                    <div *ngIf="f.password.errors.required">
+                        Password is required
+                    </div>
+                    <div *ngIf="f.password.errors.minlength">
+                        Password must be at least 6 characters
+                    </div>
+                </small>
+            </div>
+            <div class="form-group mb-4">
+                <label>Confirm Password<sup>*</sup>:</label>
+                <input
+                    type="password"
+                    formControlName="confirmPassword"
+                    class="form-control mb-0"
+                    placeholder="Confirm Password"
+                />
+                <small
+                    *ngIf="f.confirmPassword.errors && (f.confirmPassword.dirty || f.confirmPassword.touched)"
+                >
+                    <div *ngIf="f.confirmPassword.errors.required">
+                        Confirm Password is required
+                    </div>
+                    <div *ngIf="f.confirmPassword.errors.mustMatch">
+                        Passwords must match
+                    </div>
+                </small>
+            </div>
+            <div class="form-group text-center">
+                <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
