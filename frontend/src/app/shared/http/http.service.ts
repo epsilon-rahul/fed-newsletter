@@ -40,6 +40,11 @@ export class HttpService {
       .pipe(catchError(this.handleError));
   }
 
+  delete(url) {
+    return this.http.delete(this.endpoint + url, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
   private parseData(response: any) {
     return response;
   }
