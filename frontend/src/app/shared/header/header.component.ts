@@ -60,7 +60,8 @@ export class HeaderComponent implements OnInit {
   resetPassword() {
     this.passwordSubmitted = true;
     let validConfPassword = this.confirmPassword && this.confirmPassword === this.password;
-    if (this.password && validConfPassword) {
+    let validPassword = this.password && this.password.length > 5;
+    if (validPassword && validConfPassword) {
       console.log("Update Password >>>>>>>>>>>>>>")
       this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Password updated', life: 3000 });
       this.hideModal();
