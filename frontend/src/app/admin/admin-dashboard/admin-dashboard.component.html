@@ -11,14 +11,13 @@
                         <!-- ////////////
                             Table 
                         ////////////// -->
-                        <p-table #dt [value]="userList" [rows]="10" [paginator]="true" [globalFilterFields]="['name','email','type']" [(selection)]="selectedUsers"
-                            [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                            [showCurrentPageReport]="true">
+                        <p-table #dt [value]="userList" [rows]="10" [paginator]="true" [globalFilterFields]="['name','email','type']" dataKey="_id"
+                            editMode="row" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
 
                             <ng-template pTemplate="caption">
                                 <div class="row">
                                     <div class="col-md-6 text-left">
-                                        <button pButton type="button" icon="pi pi-plus" class="ui-button-success" label="Add User" (click)="openNew()"></button>
+                                        <button pButton type="button" icon="pi pi-plus" class="ui-button-success" label="Add User" (click)="addNewUser()"></button>
                                     </div>
                                     <div class="col-md-6 text-right">
                                         <div class="ui-inputgroup pull-right">
@@ -44,13 +43,29 @@
                                 </tr>
                             </ng-template>
 
-                            <ng-template pTemplate="body" let-user>
-                                <tr>
+                            <ng-template pTemplate="body" let-user let-editing="editing" let-ri="rowIndex">
+                                <tr [pEditableRow]="user">
                                     <td>{{user.name}}</td>
                                     <td>{{user.email}}</td>
-                                    <td>{{user.type}}</td>
                                     <td>
-                                        <button pButton pRipple icon="pi pi-pencil" class="ui-button-warning  mr-2" (click)="editUser(user)" title="Edit"></button>
+                                        <p-cellEditor>
+                                            <ng-template pTemplate="input">
+                                                <p-dropdown [options]="userRoles" [(ngModel)]="user.type" [style]="{'width':'100%'}"></p-dropdown>
+                                            </ng-template>
+                                            <ng-template pTemplate="output">
+                                                {{user.type}}
+                                            </ng-template>
+                                        </p-cellEditor>
+                                    </td>
+                                    <td>
+                                        <!-- Edit Button -->
+                                        <button *ngIf="!editing" pButton pRipple pInitEditableRow icon="pi pi-pencil" class="ui-button-warning  mr-2" (click)="onRowEdit(user)"
+                                            title="Edit"></button>
+                                        <button *ngIf="editing" pButton pRipple pSaveEditableRow icon="pi pi-check" class="ui-button-success  mr-2" (click)="updateUser(user)"
+                                            title="Save"></button>
+                                        <button *ngIf="editing" pButton pRipple pCancelEditableRow icon="pi pi-times" class="ui-button-info mr-2" (click)="onRowEditCancel(user,ri)"
+                                            title="Cancel"></button>
+                                        <!-- Delete Button -->
                                         <button pButton pRipple icon="pi pi-trash" class="ui-button-danger" (click)="deleteUser(user)" title="Delete"></button>
                                     </td>
                                 </tr>
@@ -60,74 +75,75 @@
                         <!-- ////////////
                             Modal 
                         ////////////// -->
-                        <p-dialog header="User Details" [(visible)]="userDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"
-                            [style]="{width: '450px'}">
+                        <p-dialog header="Add User Details" [(visible)]="userDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade"
+                            [modal]="true" [style]="{width: '450px'}">
                             <div class="p-grid ui-fluid row" *ngIf="user">
-                                <div class=" col-12 alert alert-danger mb-3" role="alert" *ngIf="errorMssg">
-                                    {{errorMssg}}
+                                <div class=" col-12 alert alert-danger mb-3" role="alert" *ngIf="errorMsg">
+                                    {{errorMsg}}
                                 </div>
-                                <form name="userForm">
-                                    <div class="col-12 mb-3">
-                                        <label for="userName">Name*</label>
-                                        <input pInputText type="text" name="userName" [(ngModel)]="user.name" required min-length="5" autofocus/>
-                                        <div *ngIf="submitted">
-                                            <small class="p-invalid" *ngIf="!user.name">Name is required</small>
-                                            <small class="p-invalid" *ngIf="user.name && user.name?.length < 5">Name should have atleast 5 characters.</small>
+                                <div class="col-12 mb-3">
+                                    <label for="userName">Name*</label>
+                                    <input pInputText type="text" name="userName" [(ngModel)]="user.name" required min-length="5" autofocus/>
+                                    <div *ngIf="submitted">
+                                        <small class="p-invalid" *ngIf="!user.name">Name is required</small>
+                                        <small class="p-invalid" *ngIf="user.name && user.name?.length < 5">Name should have atleast 5 characters.</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="userEmail">Email*</label>
+                                    <input pInputText type="userEmail" name="userEmail" [(ngModel)]="user.email" required email #prmEmail="ngModel" />
+                                    <div *ngIf="submitted">
+                                        <small class="p-invalid" *ngIf="!user.email">Email is required</small>
+                                        <small class="p-invalid" *ngIf="prmEmail.errors?.email">Please provide a valid email address</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="userPassword">Password*</label>
+                                    <input pPassword type="password" name="userPassword" [(ngModel)]="user.password" required min-length="6" />
+                                    <div *ngIf="submitted">
+                                        <small class="p-invalid" *ngIf="!user.password">Password is required</small>
+                                        <small class="p-invalid" *ngIf="user.password && user.password?.length < 6">Name should have atleast 6 characters.</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="userConfirmPassword">Confirm Password*</label>
+                                    <input pPassword type="password" name="userConfirmPassword" [(ngModel)]="confirmPassword" required />
+                                    <div *ngIf="submitted">
+                                        <small class="p-invalid" *ngIf="!confirmPassword">Retype password.</small>
+                                        <small class="p-invalid" *ngIf="confirmPassword && confirmPassword !== user.password">Password does not match.</small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mb-2">
+                                    <label class="mb-1">Role</label>
+                                    <div class="p-grid row">
+                                        <div class="col-4">
+                                            <p-radioButton name="userType" value="admin" label="Admin" [(ngModel)]="user.type"></p-radioButton>
+                                        </div>
+                                        <div class="col-4">
+                                            <p-radioButton name="userType" value="author" label="Author" [(ngModel)]="user.type"></p-radioButton>
+                                        </div>
+                                        <div class="col-4">
+                                            <p-radioButton name="userType" value="user" label="User" [(ngModel)]="user.type"></p-radioButton>
                                         </div>
                                     </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="userEmail">Email*</label>
-                                        <input pInputText type="userEmail" name="userEmail" [(ngModel)]="user.email" required />
-                                        <div *ngIf="submitted">
-                                            <small class="p-invalid" *ngIf="!user.email">Email is required</small>
-                                            <small class="p-invalid" *ngIf="!user.email">Please provide a valid email address</small>
-                                        </div>
+                                    <div *ngIf="submitted">
+                                        <small class="p-invalid" *ngIf="!user.type">Role is required</small>
                                     </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="userPassword">Password*</label>
-                                        <input pPassword type="password" name="userPassword" [(ngModel)]="user.password" required min-length="6"/>
-                                        <div *ngIf="submitted">
-                                            <small class="p-invalid" *ngIf="!user.password">Password is required</small>
-                                            <small class="p-invalid" *ngIf="user.password && user.password?.length < 5">Name should have atleast 6 characters.</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label for="userConfirmPassword">Confirm Password*</label>
-                                        <input pPassword type="password" name="userConfirmPassword" [(ngModel)]="confirmPassword" required />
-                                        <div *ngIf="submitted">                                            
-                                            <small class="p-invalid" *ngIf="!confirmPassword">Retype password.</small>
-                                            <small class="p-invalid" *ngIf="confirmPassword && confirmPassword !== user.password">Password does not match.</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 mb-2">
-                                        <label class="mb-1">Role</label>
-                                        <div class="p-grid row">
-                                            <div class="col-4">
-                                                <p-radioButton name="userType" value="admin" label="Admin" 
-                                                [(ngModel)]="user.type"></p-radioButton>
-                                            </div>
-                                            <div class="col-4">
-                                                <p-radioButton name="userType" value="user" label="User" 
-                                                [(ngModel)]="user.type"></p-radioButton>
-                                            </div>
-                                        </div>
-                                        <div *ngIf="submitted">
-                                            <small class="p-invalid" *ngIf="!user.type">Role is required</small>
-                                        </div>
-                                    </div>
-                                </form>
+                                </div>
                             </div>
                             <p-footer>
                                 <div class="ui-dialog-buttonpane ui-helper-clearfix">
                                     <button type="button" pButton icon="pi pi-times" (click)="hideDialog()" class="ui-button-warning  mr-2" label="Cancel"></button>
-                                    <button type="button" pButton icon="pi pi-check" (click)="updateUser()" class="ui-button-success" label="Save"></button>
+                                    <button type="button" pButton icon="pi pi-check" (click)="addUser()" class="ui-button-success" label="Save"></button>
                                 </div>
                             </p-footer>
                         </p-dialog>
+
                         <!-- ////////////
                             Confirmation 
                         ////////////// -->
                         <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
                         <!-- ////////////
                             Alerts 
                         ////////////// -->

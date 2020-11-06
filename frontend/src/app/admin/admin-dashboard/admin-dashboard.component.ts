@@ -5,6 +5,7 @@ import { User } from '../user';
 import { UserServiceService } from "../user-service.service";
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: "app-admin-dashboard",
@@ -13,18 +14,14 @@ import { MessageService } from 'primeng/api';
 })
 
 export class AdminDashboardComponent implements OnInit {
-  showGrid: boolean;
   userDialog: boolean;
   userList: User[];
   user: User;
-  selectedUsers: User[];
-  submitted: boolean;
+  userRoles: SelectItem[];
   confirmPassword: string;
-
-  addUser: FormGroup;
-  successMssg;
+  submitted: boolean;
   errorMsg;
-  
+  clonedUsers: { [s: string]: User; } = {};
 
   constructor(
     private fb: FormBuilder,
@@ -33,28 +30,27 @@ export class AdminDashboardComponent implements OnInit {
     private confirmationService: ConfirmationService
   ) { }
 
-  // userForm = new FormGroup({
-  //   userName: new FormControl('',[
-  //     Validators.required,
-  //     Validators.minLength(5)
-  //   ]),
-  //   userEmail: new FormControl('',[
-  //     Validators.required,
-  //     Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
-  //   ]),
-  //   userPassword: new FormControl('',[
-  //     Validators.required,
-  //     Validators.minLength(5)
-  //   ]),
-  //   userConfirmPassword: new FormControl('',[
-  //     Validators.required,
-  //   ]),
-  //   type: new FormControl('',[
-  //     Validators.required
-  //   ]),
-  // });
-
   ngOnInit() {
+    this.getUserList();
+    this.userRoles = [
+      {
+        label: 'Admin',
+        value: 'admin'
+      },
+      {
+        label: 'Author',
+        value: 'author'
+      },
+      {
+        label: 'User',
+        value: 'user'
+      }]
+  }
+
+  /**
+  * @description Get Users
+  */
+  getUserList() {
     this.userService.getUsers().subscribe(
       (resp) => {
         this.userList = resp;
@@ -65,24 +61,43 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-   /**
-   * @description Modal Add User
-   */
-  openNew() {
-    this.user = {};
-    this.errorMsg = "";
-    this.confirmPassword = "";
-    this.submitted = false;
-    this.userDialog = true;
+  /**
+ * @description Add user
+ */
+  addUser() {
+    this.submitted = true;
+    let validName = this.user.name && this.user.name.length > 4;
+    let validEmail = this.user.email;
+    let validPassword = this.user.password && this.user.password.length > 5;
+    let validConfirmPassword = this.confirmPassword && this.confirmPassword === this.user.password;
+    let validType = this.user.type
+    if (validName && validEmail && validPassword && validType && validConfirmPassword) {
+      this.userService.addUser(this.user).subscribe(
+        (resp) => {
+          console.log(resp);
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
+          this.errorMsg = "";
+          this.userList.push(this.user);
+          this.userList = [...this.userList];
+          //this.getUserList();
+          this.userDialog = false;
+          this.user = {};
+        },
+        (err) => {
+          console.log(err);
+          this.errorMsg = err;
+        }
+      );
+    }
   }
 
   /**
-   * @description Modal Edit User
-   */
-  editUser(user: User) {
-    this.user = { ...user };
+  * @description Modal Add User
+  */
+  addNewUser() {
+    this.user = {};
     this.errorMsg = "";
-    this.confirmPassword = this.user.password;
+    this.confirmPassword = "";
     this.submitted = false;
     this.userDialog = true;
   }
@@ -95,6 +110,38 @@ export class AdminDashboardComponent implements OnInit {
     this.confirmPassword = "";
     this.submitted = false;
     this.userDialog = false;
+  }
+
+  /**
+  * @description Edit Row
+  */
+  onRowEdit(user: User) {
+    this.clonedUsers[user._id] = { ...user };
+  }
+
+  /**
+  * @description Edit Row Cancel
+  */
+  onRowEditCancel(user: User, index: number) {
+    this.userList[index] = this.clonedUsers[user._id];
+    delete this.userList[user._id];
+  }
+
+  /**
+   * @description Update user details
+   */
+  updateUser(user: User) {
+    this.userService.updateUser(user._id, user).subscribe(
+      (resp) => {
+        console.log(resp);
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User details updated', life: 3000 });
+      },
+      (err) => {
+        console.log(err)
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went Wrong. Please try again.', life: 3000 });
+      }
+    )
+    delete this.clonedUsers[user._id];
   }
 
   /**
@@ -114,71 +161,11 @@ export class AdminDashboardComponent implements OnInit {
           },
           (err) => {
             console.log(err);
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went Wrong. Please try again.', life: 3000 });
           }
         )
-
         this.user = {};
       }
     });
-  }
-
-  /**
-   * @description Update user
-   */
-  updateUser() {
-    this.submitted = true;
-    let validName = this.user.name && this.user.name.length > 5;
-    let validEmail = this.user.email;
-    let validPassword = this.user.password && this.user.password.length > 5;
-    let validConfirmPassword = this.confirmPassword && this.confirmPassword ===  this.user.password;
-    let validType = this.user.type
-    if (validName && validEmail && validPassword && validType && validConfirmPassword) {
-      let userID = this.user._id;
-      if (userID) {
-        this.userList[this.findIndexById(userID)] = this.user;
-        this.userService.updateUser(userID, this.user).subscribe(
-          (resp) => {
-            console.log(resp);
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User details updated', life: 3000 });
-            this.userList = [...this.userList];
-            this.userDialog = false;
-            this.user = {};
-            this.errorMsg = "";
-          },
-          (err) => {
-            console.log(err)
-            this.errorMsg = err;
-          }
-        )
-      }
-      else {
-        this.userService.addUser(this.user).subscribe(
-          (resp) => {
-            console.log(resp);
-            this.userList.push(this.user);
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'User Created', life: 3000 });
-            this.errorMsg = "";
-            this.userList = [...this.userList];
-            this.userDialog = false;
-            this.user = {};
-          },
-          (err) => {
-            console.log(err);
-            this.errorMsg = err;
-          }
-        );
-      }
-    }
-  }
-
-  findIndexById(_id: string): number {
-    let index = -1;
-    for (let i = 0; i < this.userList.length; i++) {
-      if (this.userList[i]._id === _id) {
-        index = i;
-        break;
-      }
-    }
-    return index;
   }
 }
