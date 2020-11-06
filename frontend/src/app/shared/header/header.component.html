@@ -3,43 +3,44 @@
         <div class="row">
             <div class="col">
                 <h1>
-                    <a routerLink="/dashboard"
-                        ><img
-                            src="../../../assets/logo.svg"
-                            alt=""
-                            class="logo-img"
-                    /></a>
+                    <a routerLink="/dashboard">
+                        <img src="../../../assets/epsilon-logo.png" alt="" class="logo-img" />
+                    </a>
                 </h1>
             </div>
             <div class="col text-right">
                 <div class="btn-group" dropdown>
                     <div dropdownToggle class="profile-pic">
-                        <img src="../../../assets/300_21.jpg" alt="" />
+                        <h5>
+                            Hi, {{authSerive.getToken()}}
+                            <i class="pi pi-caret-down"></i>
+                        </h5>
                     </div>
-                    <div
-                        id="dropdown-basic"
-                        *dropdownMenu
-                        class="dropdown-menu"
-                        role="menu"
-                        aria-labelledby="button-basic"
-                    >
+                    <div id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                         <div class="profile-dropdown-detail">
-                            <div class="profile-avtar">
-                                <img src="../../../assets/300_21.jpg" alt="" />
-                            </div>
-                            <div class="profile-drop-name">
-                                {{authSerive.getToken()}}
-                            </div>
-                            <div class="sign-out">
-                                <span (click)="signOut()">Sign Out</span>
-                            </div>
+                            <ul>
+                                <li>
+                                    <div class="profile-avtar">
+                                        <img src="../../../assets/avatar.png" alt="" />
+                                    </div>
+                                    <div class="profile-drop-name">
+                                        {{authSerive.getToken()}}
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="link">Reset Password</span>
+                                </li>
+                                <li>
+                                    <span class="link" (click)="signOut()">Sign Out</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="header-bottom mt-5 navbar navbar-dark bg-dark">
+    <div class="header-bottom mt-2 navbar navbar-dark bg-dark">
         <div class="container">
             <ul>
                 <li routerLinkActive="active">
@@ -58,22 +59,10 @@
                     <a routerLink="/events">Upcoming Event</a>
                 </li>
             </ul>
-            <form
-                class="form-inline"
-                [formGroup]="searchForm"
-                (ngSubmit)="onSubmit()"
-            >
-                <input
-                    class="form-control mr-sm-2"
-                    type="search"
-                    placeholder="ClientName"
-                    aria-label="Search"
-                    formControlName="searchText"
+            <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+                <input class="form-control mr-sm-2" type="search" placeholder="ClientName" aria-label="Search" formControlName="searchText"
                 />
-                <button
-                    class="btn btn-outline-success my-2 my-sm-0"
-                    type="submit"
-                >
+                <button class="btn btn-success my-2 my-sm-0" type="submit">
                     Search
                 </button>
             </form>
