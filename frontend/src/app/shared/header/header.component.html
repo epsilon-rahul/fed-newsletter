@@ -28,7 +28,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <span class="link">Reset Password</span>
+                                    <span class="link" (click)="passwordModal()">Reset Password</span>
                                 </li>
                                 <li>
                                     <span class="link" (click)="signOut()">Sign Out</span>
@@ -68,4 +68,37 @@
             </form>
         </div>
     </div>
+    <!-- ////////////
+        Password Modal 
+    ////////////// -->
+    <p-dialog header="Reset Password" [(visible)]="passwordDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade"
+        [modal]="true" [style]="{width: '450px'}">
+        <div class="p-grid ui-fluid row">
+            <div class=" col-12 alert alert-danger mb-3" role="alert" *ngIf="passwordErrorMsg">
+                {{passwordErrorMsg}}
+            </div>
+            <div class="col-12 mb-3">
+                <label for="password">Password*</label>
+                <input pPassword type="password" name="password" [(ngModel)]="password" required min-length="6" />
+                <div *ngIf="passwordSubmitted">
+                    <small class="p-invalid" *ngIf="!password">Password is required</small>
+                    <small class="p-invalid" *ngIf="password && password?.length < 6">Name should have atleast 6 characters.</small>
+                </div>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="confirmPassword">Confirm Password*</label>
+                <input pPassword type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required />
+                <div *ngIf="passwordSubmitted">
+                    <small class="p-invalid" *ngIf="!confirmPassword">Retype password.</small>
+                    <small class="p-invalid" *ngIf="confirmPassword && confirmPassword !== password">Password does not match.</small>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                <button type="button" pButton icon="pi pi-times" (click)="hideModal()" class="ui-button-warning  mr-2" label="Cancel"></button>
+                <button type="button" pButton icon="pi pi-check" (click)="resetPassword()" class="ui-button-success" label="Save"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
 </header>

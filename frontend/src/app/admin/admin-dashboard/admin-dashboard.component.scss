@@ -1,3 +1,6 @@
+@import "variables";
+@import "media-tag";
+
 .pull-right{
     float: right;
 }
@@ -9,7 +12,7 @@
 }
 
 .p-invalid{
-    color: #ee2b33;
+    color: $error-red
 }
 
 :host ::ng-deep .ui-dialog .ui-dialog-content {
