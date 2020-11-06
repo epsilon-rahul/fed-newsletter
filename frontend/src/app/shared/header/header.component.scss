@@ -15,7 +15,7 @@ header {
         }
         h5 {
             text-transform: capitalize;
-            line-height: 50px;
+            line-height: 45px;
             .pi {
                 font-size: 12px;
                 color: $btn-primary-color;
@@ -138,4 +138,12 @@ header {
             }
         }
     }
+}
+
+:host ::ng-deep .ui-dialog .ui-dialog-content {
+    overflow-x: hidden;
+}
+
+.p-invalid{
+    color: $error-red;
 }
