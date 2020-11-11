@@ -43,7 +43,7 @@
     <div class="header-bottom mt-2 navbar navbar-dark bg-dark">
         <div class="container">
             <ul>
-                <li routerLinkActive="active">
+                <li routerLinkActive="active" *ngIf="isAdmin">
                     <a routerLink="/admin">Admin</a>
                 </li>
                 <li routerLinkActive="active">
