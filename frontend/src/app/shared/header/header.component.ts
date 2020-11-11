@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   confirmPassword: string;
   passwordSubmitted: boolean;
   searchForm;
-
+  isAdmin:any=false;
   constructor(
     public authSerive: AuthService,
     public router: Router,
@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
     this.searchForm = this.fb.group({
       searchText: ['']
     })
+    this.isAdmin = this.authSerive.isLoggednIn() && this.authSerive.getRole() === 'admin' ? true : false;
   }
 
   ngOnInit() {
