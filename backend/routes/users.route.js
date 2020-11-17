@@ -37,8 +37,19 @@ router.post('/', async (req, res) => {
   }
 });
 
+/**
+ * @description get users
+ */
 router.get('/', async (req, res) => {
   const user = await User.find();
+  res.send(user);
+});
+
+/**
+ * @description get user details
+ */
+router.get('/:id', async (req, res) => {
+  const user = await User.find({ _id: req.params.id });
   res.send(user);
 });
 
@@ -53,6 +64,24 @@ router.put('/:id', async (req, res, next) => {
       res.status(200).json({
           success: true,
           message: 'User updated successfully!'
+      });
+  });
+});
+
+/**
+ * @description update password
+ */
+router.put('/password/:id', async (req, res, next) => {
+  let user = req.body;
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
+  await User.findOneAndUpdate({ _id: req.params.id }, user, function (err) {
+      if (err) {
+          return next(err);
+      }
+      res.status(200).json({
+          success: true,
+          message: 'Password updated successfully!'
       });
   });
 });
