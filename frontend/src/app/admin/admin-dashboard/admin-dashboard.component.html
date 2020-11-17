@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="userName">Name*</label>
-                                    <input pInputText type="text" name="userName" [(ngModel)]="user.name" required min-length="5" autofocus/>
+                                    <input pInputText type="text" name="userName" [(ngModel)]="user.name" autofocus/>
                                     <div *ngIf="submitted">
                                         <small class="p-invalid" *ngIf="!user.name">Name is required</small>
                                         <small class="p-invalid" *ngIf="user.name && user.name?.length < 5">Name should have atleast 5 characters.</small>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="userEmail">Email*</label>
-                                    <input pInputText type="userEmail" name="userEmail" [(ngModel)]="user.email" required email #prmEmail="ngModel" />
+                                    <input pInputText type="userEmail" name="userEmail" [(ngModel)]="user.email"  email #prmEmail="ngModel" />
                                     <div *ngIf="submitted">
                                         <small class="p-invalid" *ngIf="!user.email">Email is required</small>
                                         <small class="p-invalid" *ngIf="prmEmail.errors?.email">Please provide a valid email address</small>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="userPassword">Password*</label>
-                                    <input pPassword type="password" name="userPassword" [(ngModel)]="user.password" required min-length="6" />
+                                    <input pPassword type="password" name="userPassword" [(ngModel)]="user.password"/>
                                     <div *ngIf="submitted">
                                         <small class="p-invalid" *ngIf="!user.password">Password is required</small>
                                         <small class="p-invalid" *ngIf="user.password && user.password?.length < 6">Name should have atleast 6 characters.</small>
@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="userConfirmPassword">Confirm Password*</label>
-                                    <input pPassword type="password" name="userConfirmPassword" [(ngModel)]="confirmPassword" required />
+                                    <input pPassword type="password" name="userConfirmPassword" [(ngModel)]="confirmPassword" />
                                     <div *ngIf="submitted">
                                         <small class="p-invalid" *ngIf="!confirmPassword">Retype password.</small>
                                         <small class="p-invalid" *ngIf="confirmPassword && confirmPassword !== user.password">Password does not match.</small>

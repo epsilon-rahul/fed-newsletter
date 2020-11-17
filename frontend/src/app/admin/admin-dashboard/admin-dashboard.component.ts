@@ -79,7 +79,7 @@ export class AdminDashboardComponent implements OnInit {
           this.errorMsg = "";
           this.userList.push(this.user);
           this.userList = [...this.userList];
-          //this.getUserList();
+          this.getUserList();
           this.userDialog = false;
           this.user = {};
         },
@@ -115,14 +115,14 @@ export class AdminDashboardComponent implements OnInit {
   /**
   * @description Edit Row
   */
-  onRowEdit(user: User) {
+  onRowEdit(user) {
     this.clonedUsers[user._id] = { ...user };
   }
 
   /**
   * @description Edit Row Cancel
   */
-  onRowEditCancel(user: User, index: number) {
+  onRowEditCancel(user, index: number) {
     this.userList[index] = this.clonedUsers[user._id];
     delete this.userList[user._id];
   }
@@ -130,7 +130,7 @@ export class AdminDashboardComponent implements OnInit {
   /**
    * @description Update user details
    */
-  updateUser(user: User) {
+  updateUser(user) {
     this.userService.updateUser(user._id, user).subscribe(
       (resp) => {
         console.log(resp);
@@ -147,7 +147,7 @@ export class AdminDashboardComponent implements OnInit {
   /**
    * @description Delete user
    */
-  deleteUser(user: User) {
+  deleteUser(user) {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + user.name + '?',
       header: 'Confirm',
