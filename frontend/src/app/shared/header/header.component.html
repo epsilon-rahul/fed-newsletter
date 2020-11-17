@@ -13,7 +13,7 @@
                     <div dropdownToggle class="profile-pic">
                         <h5>
                             Hi, {{authSerive.getToken()}}
-                            <i class="pi pi-caret-down"></i>
+                            <i class="pi pi-chevron-down"></i>
                         </h5>
                     </div>
                     <div id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -98,4 +98,8 @@
             </div>
         </p-footer>
     </p-dialog>
+    <!-- ////////////
+        Alerts 
+    ////////////// -->
+    <p-toast position="bottom-right"></p-toast>
 </header>

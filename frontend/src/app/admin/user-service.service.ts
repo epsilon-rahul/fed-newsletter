@@ -16,8 +16,16 @@ export class UserServiceService {
         return this.httpClient.get('users');
     }
 
+    getUsersDetails(id){
+        return this.httpClient.get('users/'+ id);
+    }
+
     updateUser(id, data) {
         return this.httpClient.put('users/' + id, data, {});    
+    }
+
+    updatePassword(id, data){
+        return this.httpClient.put('users/password/' + id, data, {});    
     }
 
     deleteUser(id) {
