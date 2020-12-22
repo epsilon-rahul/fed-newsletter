@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainModule } from './main/main.module';
 import {AdminModule } from './admin/admin.module';
-import { EventComponent } from './even/event/event.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ConfirmationService } from 'primeng/api';
@@ -17,8 +16,7 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy  } from '@
 
 @NgModule({
   declarations: [
-    AppComponent,
-    EventComponent,
+    AppComponent    
   ],
   imports: [
     BrowserModule,

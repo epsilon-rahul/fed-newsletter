@@ -52,7 +52,7 @@ export class AdminDashboardComponent implements OnInit {
   */
   getUserList() {
     this.userService.getUsers().subscribe(
-      (resp) => {
+      (resp: User[]) => {
         this.userList = resp;
       },
       (err) => {
