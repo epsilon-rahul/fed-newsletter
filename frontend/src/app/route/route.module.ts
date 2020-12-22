@@ -8,7 +8,7 @@ import { StatusComponent } from '../project/status/status.component';
 import { ViewAllComponent } from '../project/view-all/view-all.component';
 import { ViewDetailComponent } from '../project/view-detail/view-detail.component';
 import { ResultComponent } from '../search/result/result.component';
-import { EventComponent } from '../even/event/event.component';
+import { EventComponent } from '../event/event/event.component';
 import { AdminDashboardComponent } from '../admin/admin-dashboard/admin-dashboard.component';
 
 export const appRoutes: Routes = [

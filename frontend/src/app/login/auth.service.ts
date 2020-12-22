@@ -17,7 +17,8 @@ export class AuthService {
     sessionStorage.setItem("LoggedInUser", token.email);
     sessionStorage.setItem("LoggedStatus", status);
     sessionStorage.setItem("LoggedInUserData", token.name);
-    sessionStorage.setItem("x-auth-token", token.token)
+    sessionStorage.setItem("x-auth-token", token.token);
+    sessionStorage.setItem("LoggedInUserID", token._id);
     sessionStorage.setItem("LoggedInUserType", token.type);
   }
 

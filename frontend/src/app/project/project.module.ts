@@ -9,6 +9,7 @@ import { ViewAllComponent } from './view-all/view-all.component';
 import { ViewDetailComponent } from './view-detail/view-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxTagsInputModule } from 'ngx-tags-input';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [AddComponent, StatusComponent, ViewAllComponent, ViewDetailComponent],
@@ -18,7 +19,8 @@ import { NgxTagsInputModule } from 'ngx-tags-input';
     ReactiveFormsModule,
     NgbModule,
     NgxTagsInputModule,
-    RouterModule
+    RouterModule,
+    ButtonModule
   ],
   exports: [AddComponent, StatusComponent, ViewAllComponent, ViewDetailComponent]
 })

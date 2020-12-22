@@ -1,0 +1,20 @@
+@import "variables";
+@import "media-tag";
+
+.pull-right{
+    float: right;
+}
+
+.actionCol{
+    button{
+        margin: 0 5px;
+    }
+}
+
+.p-invalid{
+    color: $error-red
+}
+
+:host ::ng-deep .ui-dialog .ui-dialog-content {
+    overflow-x: hidden;
+}
