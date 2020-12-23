@@ -1,0 +1,21 @@
+@import "variables";
+@import "media-tag";
+
+.events-container{
+    background-color: #ffffff;
+    padding: 0.571em 1em;
+    border: 1px solid #c8c8c8;
+    color: #333333;
+}
+
+.pull-right{
+    float: right;
+}
+
+.p-invalid{
+    color: $error-red
+}
+
+:host ::ng-deep .ui-dialog .ui-dialog-content {
+    overflow-x: hidden;
+}
