@@ -15,7 +15,7 @@ import { SelectItem } from 'primeng/api';
 
 export class AdminDashboardComponent implements OnInit {
   userDialog: boolean;
-  userList: User[] = [];
+  userList: User[];
   user: User;
   userRoles: SelectItem[];
   confirmPassword: string;
@@ -53,8 +53,6 @@ export class AdminDashboardComponent implements OnInit {
   getUserList() {
     this.userService.getUsers().subscribe(
       (resp: User[]) => {
-        debugger;
-        console.log(`Response: ${resp}`);
         this.userList = resp;
       },
       (err) => {
