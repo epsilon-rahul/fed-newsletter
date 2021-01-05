@@ -19,6 +19,7 @@
                 <div class="row">
                     <div class="col-md-6 text-left">
                         <button
+                            *ngIf="isAdmin"
                             pButton
                             type="button"
                             icon="pi pi-plus"
@@ -72,10 +73,15 @@
                 <tr [pEditableRow]="event">
                     <td>{{ event.name }}</td>
                     <td>{{ event.description }}</td>
-                    <td><a href="{{ event.link }}" target="_blank">{{ event.link }}</a></td>
+                    <td>
+                        <a href="{{ event.link }}" target="_blank">{{
+                            event.link
+                        }}</a>
+                    </td>
                     <td>
                         <!-- Delete Button -->
                         <button
+                            *ngIf="isAdmin"
                             pButton
                             pRipple
                             icon="pi pi-trash"
