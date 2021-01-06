@@ -4,7 +4,11 @@
             <div class="col">
                 <h1>
                     <a routerLink="/dashboard">
-                        <img src="../../../assets/epsilon-logo.png" alt="" class="logo-img" />
+                        <img
+                            src="../../../assets/epsilon-logo.png"
+                            alt=""
+                            class="logo-img"
+                        />
                     </a>
                 </h1>
             </div>
@@ -12,26 +16,39 @@
                 <div class="btn-group" dropdown>
                     <div dropdownToggle class="profile-pic">
                         <h5>
-                            Hi, {{authSerive.getToken()}}
+                            Hi, {{ authSerive.getToken() }}
                             <i class="pi pi-chevron-down"></i>
                         </h5>
                     </div>
-                    <div id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <div
+                        id="dropdown-basic"
+                        *dropdownMenu
+                        class="dropdown-menu"
+                        role="menu"
+                        aria-labelledby="button-basic"
+                    >
                         <div class="profile-dropdown-detail">
                             <ul>
                                 <li>
                                     <div class="profile-avtar">
-                                        <img src="../../../assets/avatar.png" alt="" />
+                                        <img
+                                            src="../../../assets/avatar.png"
+                                            alt=""
+                                        />
                                     </div>
                                     <div class="profile-drop-name">
-                                        {{authSerive.getToken()}}
+                                        {{ authSerive.getToken() }}
                                     </div>
                                 </li>
                                 <li>
-                                    <span class="link" (click)="passwordModal()">Reset Password</span>
+                                    <span class="link" (click)="passwordModal()"
+                                        >Reset Password</span
+                                    >
                                 </li>
                                 <li>
-                                    <span class="link" (click)="signOut()">Sign Out</span>
+                                    <span class="link" (click)="signOut()"
+                                        >Sign Out</span
+                                    >
                                 </li>
                             </ul>
                         </div>
@@ -52,15 +69,30 @@
                 <li routerLinkActive="active">
                     <a routerLink="/projects">Opportunity</a>
                 </li>
-                <li routerLinkActive="active">
+                <li
+                    *ngIf="
+                        this.authSerive.getRole() === 'admin' ||
+                        this.authSerive.getRole() === 'author'
+                    "
+                    routerLinkActive="active"
+                >
                     <a routerLink="/statupdate">Status Update</a>
                 </li>
                 <li routerLinkActive="active">
                     <a routerLink="/events">Events</a>
                 </li>
             </ul>
-            <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-                <input class="form-control mr-sm-2" type="search" placeholder="ClientName" aria-label="Search" formControlName="searchText"
+            <form
+                class="form-inline"
+                [formGroup]="searchForm"
+                (ngSubmit)="onSubmit()"
+            >
+                <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="ClientName"
+                    aria-label="Search"
+                    formControlName="searchText"
                 />
                 <button class="btn btn-success my-2 my-sm-0" type="submit">
                     Search
@@ -71,33 +103,83 @@
     <!-- ////////////
         Password Modal 
     ////////////// -->
-    <p-dialog header="Reset Password" [(visible)]="passwordDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade"
-        [modal]="true" [style]="{width: '450px'}">
+    <p-dialog
+        header="Reset Password"
+        [(visible)]="passwordDialog"
+        [focusOnShow]="false"
+        [responsive]="true"
+        showEffect="fade"
+        [modal]="true"
+        [style]="{ width: '450px' }"
+    >
         <div class="p-grid ui-fluid row">
-            <div class=" col-12 alert alert-danger mb-3" role="alert" *ngIf="passwordErrorMsg">
-                {{passwordErrorMsg}}
+            <div
+                class="col-12 alert alert-danger mb-3"
+                role="alert"
+                *ngIf="passwordErrorMsg"
+            >
+                {{ passwordErrorMsg }}
             </div>
             <div class="col-12 mb-3">
                 <label for="password">Password*</label>
-                <input pPassword type="password" name="password" [(ngModel)]="password" required min-length="6" />
+                <input
+                    pPassword
+                    type="password"
+                    name="password"
+                    [(ngModel)]="password"
+                    required
+                    min-length="6"
+                />
                 <div *ngIf="passwordSubmitted">
-                    <small class="p-invalid" *ngIf="!password">Password is required</small>
-                    <small class="p-invalid" *ngIf="password && password?.length < 6">Name should have atleast 6 characters.</small>
+                    <small class="p-invalid" *ngIf="!password"
+                        >Password is required</small
+                    >
+                    <small
+                        class="p-invalid"
+                        *ngIf="password && password?.length < 6"
+                        >Name should have atleast 6 characters.</small
+                    >
                 </div>
             </div>
             <div class="col-12 mb-3">
                 <label for="confirmPassword">Confirm Password*</label>
-                <input pPassword type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required />
+                <input
+                    pPassword
+                    type="password"
+                    name="confirmPassword"
+                    [(ngModel)]="confirmPassword"
+                    required
+                />
                 <div *ngIf="passwordSubmitted">
-                    <small class="p-invalid" *ngIf="!confirmPassword">Retype password.</small>
-                    <small class="p-invalid" *ngIf="confirmPassword && confirmPassword !== password">Password does not match.</small>
+                    <small class="p-invalid" *ngIf="!confirmPassword"
+                        >Retype password.</small
+                    >
+                    <small
+                        class="p-invalid"
+                        *ngIf="confirmPassword && confirmPassword !== password"
+                        >Password does not match.</small
+                    >
                 </div>
             </div>
         </div>
         <p-footer>
             <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                <button type="button" pButton icon="pi pi-times" (click)="hideModal()" class="ui-button-warning  mr-2" label="Cancel"></button>
-                <button type="button" pButton icon="pi pi-check" (click)="resetPassword()" class="ui-button-success" label="Save"></button>
+                <button
+                    type="button"
+                    pButton
+                    icon="pi pi-times"
+                    (click)="hideModal()"
+                    class="ui-button-warning mr-2"
+                    label="Cancel"
+                ></button>
+                <button
+                    type="button"
+                    pButton
+                    icon="pi pi-check"
+                    (click)="resetPassword()"
+                    class="ui-button-success"
+                    label="Save"
+                ></button>
             </div>
         </p-footer>
     </p-dialog>
