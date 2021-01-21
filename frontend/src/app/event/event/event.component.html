@@ -1,0 +1,192 @@
+<div class="container">
+    <div class="card p-4 col-md-12 events-container">
+        <h2 class="mb-4">Manage Events</h2>
+        <!-- ////////////
+            Table 
+        ////////////// -->
+        <p-table
+            #dt
+            [value]="eventList"
+            [rows]="10"
+            [paginator]="true"
+            [globalFilterFields]="['name', 'description', 'link']"
+            dataKey="_id"
+            editMode="row"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+        >
+            <ng-template pTemplate="caption">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <button
+                            *ngIf="isAdmin"
+                            pButton
+                            type="button"
+                            icon="pi pi-plus"
+                            class="ui-button-success"
+                            label="Add Event"
+                            (click)="addNewEvent()"
+                        ></button>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <div class="ui-inputgroup pull-right">
+                            <span class="ui-inputgroup-addon">
+                                <i
+                                    class="pi pi-search"
+                                    style="line-height: 1.25"
+                                ></i>
+                            </span>
+                            <input
+                                pInputText
+                                type="text"
+                                (input)="
+                                    dt.filterGlobal(
+                                        $event.target.value,
+                                        'contains'
+                                    )
+                                "
+                                placeholder="Search..."
+                            />
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name">
+                        Name
+                        <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th>Description</th>
+                    <th>Link</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+
+            <ng-template
+                pTemplate="body"
+                let-event
+                let-editing="editing"
+                let-ri="rowIndex"
+            >
+                <tr [pEditableRow]="event">
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.description }}</td>
+                    <td>
+                        <a href="{{ event.link }}" target="_blank">{{
+                            event.link
+                        }}</a>
+                    </td>
+                    <td>
+                        <!-- Delete Button -->
+                        <button
+                            *ngIf="isAdmin"
+                            pButton
+                            pRipple
+                            icon="pi pi-trash"
+                            class="ui-button-danger"
+                            (click)="deleteEvent(event)"
+                            title="Delete"
+                        ></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <!-- ////////////
+            Modal 
+        ////////////// -->
+        <p-dialog
+            header="Add Event Details"
+            [(visible)]="eventDialog"
+            [focusOnShow]="false"
+            [responsive]="true"
+            showEffect="fade"
+            [modal]="true"
+            [style]="{ width: '450px' }"
+        >
+            <div class="p-grid ui-fluid row" *ngIf="event">
+                <div
+                    class="col-12 alert alert-danger mb-3"
+                    role="alert"
+                    *ngIf="errorMsg"
+                >
+                    {{ errorMsg }}
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="eventName">Name*</label>
+                    <input
+                        pInputText
+                        type="text"
+                        name="eventName"
+                        [(ngModel)]="event.name"
+                        autofocus
+                    />
+                    <div *ngIf="submitted">
+                        <small class="p-invalid" *ngIf="!event.name"
+                            >Name is required</small
+                        >
+                        <small
+                            class="p-invalid"
+                            *ngIf="event.name && event.name?.length < 5"
+                            >Name should have atleast 5 characters.</small
+                        >
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="eventDesc">Description*</label>
+                    <input
+                        pInputText
+                        type="text"
+                        name="eventDesc"
+                        [(ngModel)]="event.description"
+                    />
+                    <div *ngIf="submitted">
+                        <small class="p-invalid" *ngIf="!event.description"
+                            >Description is required</small
+                        >
+                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="eventDesc">Link</label>
+                    <input
+                        pInputText
+                        type="text"
+                        name="eventLink"
+                        [(ngModel)]="event.link"
+                    />
+                </div>
+            </div>
+            <p-footer>
+                <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                    <button
+                        type="button"
+                        pButton
+                        icon="pi pi-times"
+                        (click)="hideDialog()"
+                        class="ui-button-warning mr-2"
+                        label="Cancel"
+                    ></button>
+                    <button
+                        type="button"
+                        pButton
+                        icon="pi pi-check"
+                        (click)="addEvent()"
+                        class="ui-button-success"
+                        label="Save"
+                    ></button>
+                </div>
+            </p-footer>
+        </p-dialog>
+
+        <!-- ////////////
+            Confirmation 
+        ////////////// -->
+        <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+
+        <!-- ////////////
+            Alerts 
+        ////////////// -->
+        <p-toast position="bottom-right"></p-toast>
+    </div>
+</div>

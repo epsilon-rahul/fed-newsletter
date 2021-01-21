@@ -1,0 +1,41 @@
+{
+    "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+    "index": "/index.html",
+    "assetGroups": [{
+        "name": "app",
+        "installMode": "prefetch",
+        "resources": {
+            "files": [
+                "/favicon.ico",
+                "/index.html",
+                "/manifest.webmanifest",
+                "/*.css",
+                "/*.js"
+            ]
+        }
+    }, {
+        "name": "assets",
+        "installMode": "lazy",
+        "updateMode": "prefetch",
+        "resources": {
+            "files": [
+                "/assets/**",
+                "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+            ]
+        }
+    }],
+    "dataGroups": [{
+        "name": "Newletter-urls",
+        "cacheConfig": {
+            "maxAge": "3000s",
+            "maxSize": 20,
+            "strategy": "freshness",
+            "timeout": "30s"
+        },
+        "urls": [
+            "http://127.0.0.1:8080/dashboard",
+            "http://127.0.0.1:8080/login",
+            "http://127.0.0.1:8080/projects"
+        ]
+    }]
+}

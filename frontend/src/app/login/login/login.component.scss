@@ -1,0 +1,52 @@
+@import "variables";
+@import "media-tag";
+
+.login-layout{
+
+  background: url('../../../assets/bg-2.jpg') no-repeat;
+  height: 100vh;
+  -webkit-box-align: center!important;
+    align-items: center!important;
+    display: flex;
+
+  .login-wrapper{
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    @include sm {
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    a{
+      color: $default-color;
+      &:hover{
+        color: $hoverColor;
+      }
+    }
+    label{
+      color: $default-color;
+    }
+    button{
+      font-weight: 500;
+      font-size: $font-family;
+      height: 50px;
+      padding-left: 2.75rem;
+      padding-right: 2.75rem;
+    }
+
+  }
+
+    .login-account-link{
+        font-size: $font-size;
+        color: $default-color;
+        font-weight: 500;
+        a{
+            color: $hoverColor;
+        }
+    }
+    h3{
+        font-size: 2rem;
+        color: $heading-color;
+    }
+}
