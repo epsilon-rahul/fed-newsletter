@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { ProjectService } from "../project/project.service";
 import { multi } from "./data";
+import { map } from "rxjs/operators";
+
 
 @Component({
     selector: "app-dashboard",
@@ -42,8 +44,40 @@ export class DashboardComponent implements OnInit {
     };
     cardColor: string = "#232837";
 
+    opportunity = [];
+    data;
+
     constructor(public projectService: ProjectService) {
-        Object.assign(this, { multi });
+        
+    }
+
+    ngOnInit() {
+        this.getOpportunityCount();
+    }
+
+    getOpportunityCount() {
+        this.projectService.list("").subscribe(
+            (resp) => {
+                console.log(resp);
+                if (resp){
+
+                  Object.keys(resp).forEach(key => {​​
+                    if(resp[key].oppStatus == 'SOW'){​​​​
+                      this.opportunity.push(resp[key])
+                    }​​​​
+                }​​);
+                }
+                this.renderChart()
+                console.log(this.opportunity.length);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    }
+
+    renderChart(){
+      Object.assign(this, { multi });
 
         this.first = [
             {
@@ -68,7 +102,7 @@ export class DashboardComponent implements OnInit {
             },
             {
                 name: "SOW",
-                value: 4300000,
+                value: this.opportunity.length,
             },
             {
                 name: "Verbal approval",
@@ -144,19 +178,7 @@ export class DashboardComponent implements OnInit {
                 value: 6,
             },
         ];
-    }
-
-    ngOnInit() {
         this.single = this.first;
-        this.projectService.list({ oppStatus: 1 }).subscribe(
-            (resp) => {
-                console.log(resp);
-                this.lists = resp;
-            },
-            (err) => {
-                console.log(err);
-            }
-        );
     }
 
     onSelect(event) {
