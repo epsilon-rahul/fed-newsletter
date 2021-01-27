@@ -1,9 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { ProjectService } from "../project/project.service";
-import { multi } from "./data";
-import { map } from "rxjs/operators";
-
+import { Component, OnInit } from '@angular/core';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { multi } from './data';
+import { EventServiceService } from "../event/event-service.service";
+import { ProjectService } from '../project/project.service';
 
 @Component({
     selector: "app-dashboard",
@@ -16,7 +15,8 @@ export class DashboardComponent implements OnInit {
     multi: any[];
     // view: any[] = [, 300];
     view: any[] = [1100, 400];
-
+    eventSlide1: any[];
+    eventSlide2: any[];
     // options
     legend: boolean = false;
     showLabels: boolean = true;
@@ -47,37 +47,8 @@ export class DashboardComponent implements OnInit {
     opportunity = [];
     data;
 
-    constructor(public projectService: ProjectService) {
-        
-    }
-
-    ngOnInit() {
-        this.getOpportunityCount();
-    }
-
-    getOpportunityCount() {
-        this.projectService.list("").subscribe(
-            (resp) => {
-                console.log(resp);
-                if (resp){
-
-                  Object.keys(resp).forEach(key => {​​
-                    if(resp[key].oppStatus == 'SOW'){​​​​
-                      this.opportunity.push(resp[key])
-                    }​​​​
-                }​​);
-                }
-                this.renderChart()
-                console.log(this.opportunity.length);
-            },
-            (err) => {
-                console.log(err);
-            }
-        );
-    }
-
-    renderChart(){
-      Object.assign(this, { multi });
+    constructor(public projectService: ProjectService, public eventService: EventServiceService) {
+        Object.assign(this, { multi });
 
         this.first = [
             {
@@ -102,7 +73,7 @@ export class DashboardComponent implements OnInit {
             },
             {
                 name: "SOW",
-                value: this.opportunity.length,
+                value: 1,
             },
             {
                 name: "Verbal approval",
@@ -178,21 +149,45 @@ export class DashboardComponent implements OnInit {
                 value: 6,
             },
         ];
-        this.single = this.first;
     }
 
-    onSelect(event) {
-        console.log(event);
-    }
+  
 
-    change(e) {
-        console.log(e);
-        if (e == "Vertical Domain") {
-            this.single = this.two;
-        } else if (e == "By Client") {
-            this.single = this.three;
-        } else {
-            this.single = this.first;
+  ngOnInit() {
+    this.single = this.first;
+    this.getEventList();
+  }
+
+  /**
+   * @description Get Events
+   */
+  getEventList() {
+    this.eventService.getEvents().subscribe(
+        (resp) => {
+          if(Array.isArray(resp)){
+            //resp.reverse();
+            this.eventSlide1 = resp.slice(0, 3);
+            this.eventSlide2 = resp.slice(3,6);
+          }            
+        },
+        (err) => {
+            console.log(err);
         }
-    }
+    );
+  }
+
+  onSelect(event) {
+    console.log(event);
+  }
+
+  change(e) {
+      console.log(e);
+      if (e == "Vertical Domain") {
+          this.single = this.two;
+      } else if (e == "By Client") {
+          this.single = this.three;
+      } else {
+          this.single = this.first;
+      }
+  }
 }

@@ -4,3 +4,15 @@
 .ngx-charts-outer{
   width: 100% !important;
 }
+
+.carousel{
+  .card{
+    height: 100%;
+    color: #333333;
+  }
+}
+
+:host ::ng-deep .carousel-control-next, 
+:host ::ng-deep .carousel-control-prev{
+  display: none;
+}
