@@ -48,32 +48,6 @@ export class EventComponent implements OnInit {
                 console.log(err);
             }
         );
-        this.eventList = [
-            {
-                _id: 1000,
-                name: "Event1",
-                description: "desc1",
-                link: "https://link1.com",
-            },
-            {
-                _id: 2000,
-                name: "Event2",
-                description: "desc2",
-                link: "https://link2.com",
-            },
-            {
-                _id: 3000,
-                name: "Event3",
-                description: "desc3",
-                link: "https://link3.com",
-            },
-            {
-                _id: 4000,
-                name: "Event4",
-                description: "desc4",
-                link: "https://link4.com",
-            },
-        ];
     }
 
     /**

@@ -1,135 +1,41 @@
 <div class="container">
-    <ngb-carousel class="mb-5">
+    <!-- **************************
+        DASHBOARD EVENTS
+    ************************** -->
+    <div class="mt-5 mb-5" *ngIf="eventSlide1?.length == 0">
+        <h4 class="text-center">Please check back, more events coming soon.</h4>
+    </div>
+    <ngb-carousel class="mb-5" *ngIf="eventSlide1?.length > 0">
         <ng-template ngbSlide>
             <div class="row">
-                <div class="col">
+                <div class="col" *ngFor="let event of eventSlide1">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">News title 1</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">News title 4</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">News title 5</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <p class="card-text">{{ event.description }}</p>
+                            <a *ngIf="event.link" href="{{event.link}}" target="_blank" class="btn btn-primary">Link</a>
                         </div>
                     </div>
                 </div>
             </div>
         </ng-template>
-        <ng-template ngbSlide>
+        <ng-template ngbSlide *ngIf="eventSlide2?.length > 0">
             <div class="row">
-                <div class="col">
+                <div class="col-md-4" *ngFor="let event of eventSlide2">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">News title 6</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">News title 2</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">News title 2</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ng-template>
-        <ng-template ngbSlide>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">News title 1</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">News title 2</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">News title 2</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card
-                                title and make up the bulk of the card's
-                                content.
-                            </p>
-                            <a href="#" class="btn btn-primary">Link</a>
+                            <h5 class="card-title">{{ event.name }}</h5>
+                            <p class="card-text">{{ event.description }}</p>
+                            <a *ngIf="event.link" href="{{event.link}}" target="_blank" class="btn btn-primary">Link</a>
                         </div>
                     </div>
                 </div>
             </div>
         </ng-template>
     </ngb-carousel>
+    <!-- **************************
+        EOF DASHBOARD EVENTS
+    ************************** -->
 
     <!-- <div class="row">
         <div class="col-6">
