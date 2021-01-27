@@ -118,6 +118,7 @@
                     <input
                         pInputText
                         type="text"
+                        maxlength="50"
                         name="eventName"
                         [(ngModel)]="event.name"
                         autofocus
@@ -135,12 +136,15 @@
                 </div>
                 <div class="col-12 mb-3">
                     <label for="eventDesc">Description*</label>
-                    <input
-                        pInputText
-                        type="text"
+                    <textarea 
+                        [rows]="4" 
+                        [cols]="30" 
+                        pInputTextarea 
+                        maxlength="200"
                         name="eventDesc"
                         [(ngModel)]="event.description"
-                    />
+                        autoResize="autoResize">
+                    </textarea>
                     <div *ngIf="submitted">
                         <small class="p-invalid" *ngIf="!event.description"
                             >Description is required</small

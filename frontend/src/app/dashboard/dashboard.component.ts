@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { multi } from './data';
+import { EventServiceService } from "../event/event-service.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +16,8 @@ export class DashboardComponent implements OnInit {
   two: any[];
   multi: any[];
   view: any[] = [, 300];
+  eventSlide1: any[];
+  eventSlide2: any[];
 
   // options
   legend: boolean = false;
@@ -36,7 +39,9 @@ export class DashboardComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(
+    public eventService: EventServiceService
+  ) {
     Object.assign(this, { multi });
 
 
@@ -118,6 +123,25 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.single = this.first;
+    this.getEventList();
+  }
+
+  /**
+   * @description Get Events
+   */
+  getEventList() {
+    this.eventService.getEvents().subscribe(
+        (resp) => {
+          if(Array.isArray(resp)){
+            resp.reverse();
+            this.eventSlide1 = resp.slice(0, 3);
+            this.eventSlide2 = resp.slice(3,6);
+          }            
+        },
+        (err) => {
+            console.log(err);
+        }
+    );
   }
 
   onSelect(event) {
