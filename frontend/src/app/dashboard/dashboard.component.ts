@@ -48,107 +48,7 @@ export class DashboardComponent implements OnInit {
     data;
 
     constructor(public projectService: ProjectService, public eventService: EventServiceService) {
-        Object.assign(this, { multi });
-
-        this.first = [
-            {
-                name: "RFP requested",
-                value: 8940000,
-            },
-            {
-                name: "RFP in-progress",
-                value: 5000000,
-            },
-            {
-                name: "Proposal submitted",
-                value: 7200000,
-            },
-            {
-                name: "Proposal under Review ",
-                value: 5200000,
-            },
-            {
-                name: "SOW under Review",
-                value: 7700000,
-            },
-            {
-                name: "SOW",
-                value: 1,
-            },
-            {
-                name: "Verbal approval",
-                value: 4300000,
-            },
-            {
-                name: "Won",
-                value: 4300000,
-            },
-            {
-                name: "Business Development",
-                value: 4300000,
-            },
-            {
-                name: "Proposal not shortlisted",
-                value: 4300000,
-            },
-            {
-                name: "Closed",
-                value: 4300000,
-            },
-        ];
-
-        this.two = [
-            {
-                name: "Financial",
-                value: 8940000,
-            },
-            {
-                name: "Retail",
-                value: 5000000,
-            },
-            {
-                name: "Media",
-                value: 7200000,
-            },
-            {
-                name: "Healthcare",
-                value: 5200000,
-            },
-            {
-                name: "Telecom",
-                value: 7700000,
-            },
-            {
-                name: "Travel & Hospitality",
-                value: 4300000,
-            },
-        ];
-        this.three = [
-            {
-                name: "Samsung",
-                value: 1,
-            },
-            {
-                name: "Bosch",
-                value: 2,
-            },
-            {
-                name: "Exxon",
-                value: 3,
-            },
-            {
-                name: "Citi",
-                value: 4,
-            },
-            {
-                name: "Telecom",
-                value: 5,
-            },
-            {
-                name: "Microsoft",
-                value: 6,
-            },
-        ];
+        
     }
 
   
@@ -156,6 +56,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.single = this.first;
     this.getEventList();
+    this.getOpportunityCount();
   }
 
   /**
@@ -175,6 +76,133 @@ export class DashboardComponent implements OnInit {
         }
     );
   }
+
+  getOpportunityCount() {
+    this.projectService.list("").subscribe(
+        (resp) => {
+            console.log(resp);
+            if (resp){
+
+              Object.keys(resp).forEach(key => {​​
+                if(resp[key].oppStatus == 'SOW'){​​​​
+                  this.opportunity.push(resp[key])
+                }​​​​
+            }​​);
+            }
+            this.renderChart()
+            console.log(this.opportunity.length);
+        },
+        (err) => {
+            console.log(err);
+        }
+    );
+}
+
+renderChart(){
+  Object.assign(this, { multi });
+
+    this.first = [
+        {
+            name: "RFP requested",
+            value: 8940000,
+        },
+        {
+            name: "RFP in-progress",
+            value: 5000000,
+        },
+        {
+            name: "Proposal submitted",
+            value: 7200000,
+        },
+        {
+            name: "Proposal under Review ",
+            value: 5200000,
+        },
+        {
+            name: "SOW under Review",
+            value: 7700000,
+        },
+        {
+            name: "SOW",
+            value: this.opportunity.length,
+        },
+        {
+            name: "Verbal approval",
+            value: 4300000,
+        },
+        {
+            name: "Won",
+            value: 4300000,
+        },
+        {
+            name: "Business Development",
+            value: 4300000,
+        },
+        {
+            name: "Proposal not shortlisted",
+            value: 4300000,
+        },
+        {
+            name: "Closed",
+            value: 4300000,
+        },
+    ];
+
+    this.two = [
+        {
+            name: "Financial",
+            value: 8940000,
+        },
+        {
+            name: "Retail",
+            value: 5000000,
+        },
+        {
+            name: "Media",
+            value: 7200000,
+        },
+        {
+            name: "Healthcare",
+            value: 5200000,
+        },
+        {
+            name: "Telecom",
+            value: 7700000,
+        },
+        {
+            name: "Travel & Hospitality",
+            value: 4300000,
+        },
+    ];
+    this.three = [
+        {
+            name: "Samsung",
+            value: 1,
+        },
+        {
+            name: "Bosch",
+            value: 2,
+        },
+        {
+            name: "Exxon",
+            value: 3,
+        },
+        {
+            name: "Citi",
+            value: 4,
+        },
+        {
+            name: "Telecom",
+            value: 5,
+        },
+        {
+            name: "Microsoft",
+            value: 6,
+        },
+    ];
+    this.single = this.first;
+}
+
 
   onSelect(event) {
     console.log(event);
