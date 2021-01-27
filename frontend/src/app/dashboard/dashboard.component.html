@@ -155,6 +155,7 @@
                     >
                         <option>Opportunity Status</option>
                         <option>Vertical Domain</option>
+                        <option>By Client</option>
                     </select>
                 </div>
             </div>
@@ -163,6 +164,7 @@
 
     <div class="mt-5">
         <ngx-charts-number-card
+            [view]="view"
             [scheme]="colorScheme"
             [results]="single"
             [cardColor]="cardColor"
