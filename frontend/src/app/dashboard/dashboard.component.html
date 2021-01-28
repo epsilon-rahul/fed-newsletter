@@ -13,7 +13,13 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ event.name }}</h5>
                             <p class="card-text">{{ event.description }}</p>
-                            <a *ngIf="event.link" href="{{event.link}}" target="_blank" class="btn btn-primary">Link</a>
+                            <a
+                                *ngIf="event.link"
+                                href="{{ event.link }}"
+                                target="_blank"
+                                class="btn btn-primary"
+                                >Link</a
+                            >
                         </div>
                     </div>
                 </div>
@@ -26,7 +32,13 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ event.name }}</h5>
                             <p class="card-text">{{ event.description }}</p>
-                            <a *ngIf="event.link" href="{{event.link}}" target="_blank" class="btn btn-primary">Link</a>
+                            <a
+                                *ngIf="event.link"
+                                href="{{ event.link }}"
+                                target="_blank"
+                                class="btn btn-primary"
+                                >Link</a
+                            >
                         </div>
                     </div>
                 </div>
@@ -72,11 +84,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3" *ngFor="let val of single">
-                    <div
-                        class="card-counter primary"
-                        [style.border-left]="'50px solid ' + val.color"
-                    >
-                        <i class="{{ val.fonts }}"></i>
+                    <div class="card-counter primary {{ val.id }}">
+                        <i class="login"></i>
                         <span class="count-numbers">{{ val.value }}</span>
                         <span class="count-name">{{ val.name }}</span>
                     </div>

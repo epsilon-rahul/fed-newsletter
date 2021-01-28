@@ -14,6 +14,205 @@
     border-radius: 5px;
     transition: 0.3s linear all;
 }
+.card-counter.primary.won {
+    border-left: 50px solid #28a745;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f091";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.Rfpr {
+    border-left: 50px solid #8e24aa;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f25a";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.Rfpi {
+    border-left: 50px solid #17a2b8;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f110";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.Pros {
+    border-left: 50px solid #ffc107;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f25a";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.Prour {
+    border-left: 50px solid #dc3545;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f086";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.Sowu {
+    border-left: 50px solid #00c0ef;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f086";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.Sow {
+    border-left: 50px solid #007bff;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f0b1";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.verba {
+    border-left: 50px solid #fb8c00;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f164";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.financial {
+    border-left: 50px solid #fb8c00;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f0d6";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.retail {
+    border-left: 50px solid #007bff;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f217";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.media {
+    border-left: 50px solid #dc3545;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f030";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.healthcare {
+    border-left: 50px solid #28a745;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f0f9";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.telecom {
+    border-left: 50px solid #8e24aa;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f095";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.card-counter.primary.Travel {
+    border-left: 50px solid #ffc107;
+    .login::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f0fb";
+        color: white;
+        position: relative;
+        right: 45px;
+        font-size: 17px;
+        bottom: 20px;
+        font-style: normal;
+    }
+}
+.element {
+    position: relative;
+}
 
 .card-counter:hover {
     box-shadow: 4px 4px 20px #dadada;
@@ -26,9 +225,7 @@
     border-left: 50px solid #cad1d8;
     border-radius: 0;
 }
-.card-counter:nth-child(1) {
-    border-left: 50px solid black;
-}
+
 // .card-counter.primary :first-child {
 //     background-color: #f7f4f4;
 //     color: #343a40;
@@ -67,14 +264,14 @@
     font-weight: 600;
 }
 
-.carousel{
-  .card{
-    height: 100%;
-    color: #333333;
-  }
+.carousel {
+    .card {
+        height: 100%;
+        color: #333333;
+    }
 }
 
-:host ::ng-deep .carousel-control-next, 
-:host ::ng-deep .carousel-control-prev{
-  display: none;
+:host ::ng-deep .carousel-control-next,
+:host ::ng-deep .carousel-control-prev {
+    display: none;
 }
