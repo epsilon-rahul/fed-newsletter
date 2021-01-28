@@ -66,3 +66,15 @@
     color: #080808;
     font-weight: 600;
 }
+
+.carousel{
+  .card{
+    height: 100%;
+    color: #333333;
+  }
+}
+
+:host ::ng-deep .carousel-control-next, 
+:host ::ng-deep .carousel-control-prev{
+  display: none;
+}

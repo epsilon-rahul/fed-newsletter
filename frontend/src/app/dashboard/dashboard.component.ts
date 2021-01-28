@@ -47,80 +47,78 @@ export class DashboardComponent implements OnInit {
 
         this.first = [
             {
+                id: "won",
                 name: "Won",
                 value: 43,
-                color: "#28a745",
-                fonts: "fa fa-trophy",
             },
             {
+                id: "Rfpr",
                 name: "RFP requested",
                 value: 89,
-                color: "#8e24aa",
-                fonts: "fa fa-hand-pointer",
             },
             {
+                id: "Rfpi",
                 name: "RFP in-progress",
                 value: 50,
-                color: "#17a2b8",
-                fonts: "fa fa-spinner",
             },
 
             {
+                id: "Pros",
                 name: "Proposal submitted",
                 value: 72,
-                color: "#ffc107",
-                fonts: "fa fa-hand-pointer-o",
             },
             {
+                id: "Prour",
                 name: "Proposal under Review ",
                 value: 52,
-                color: "#dc3545",
-                fonts: "fa fa-commenting-o",
             },
             {
+                id: "Sowu",
                 name: "SOW under Review",
                 value: 77,
-                color: "#00c0ef",
-                fonts: "fa fa-commenting-o",
             },
             {
+                id: "Sow",
                 name: "SOW",
                 value: 43,
-                color: "#007bff",
-                fonts: "fa fa-briefcase",
             },
             {
+                id: "verba",
                 name: "Verbal approval",
                 value: 43,
-                color: "#fb8c00",
-                fonts: "fa fa-thumbs-o-up",
             },
         ];
 
         this.two = [
             {
+                id: "financial",
                 name: "Financial",
-                value: 8940000,
+                value: 40,
             },
             {
+                id: "retail",
                 name: "Retail",
-                value: 5000000,
+                value: 50,
             },
             {
+                id: "media",
                 name: "Media",
-                value: 7200000,
+                value: 72,
             },
             {
+                id: "healthcare",
                 name: "Healthcare",
-                value: 5200000,
+                value: 52,
             },
             {
+                id: "telecom",
                 name: "Telecom",
-                value: 7700000,
+                value: 77,
             },
             {
+                id: "Travel",
                 name: "Travel & Hospitality",
-                value: 4300000,
+                value: 43,
             },
         ];
         this.three = [
@@ -131,22 +129,6 @@ export class DashboardComponent implements OnInit {
             {
                 name: "Bosch",
                 value: 2,
-            },
-            {
-                name: "Exxon",
-                value: 3,
-            },
-            {
-                name: "Citi",
-                value: 4,
-            },
-            {
-                name: "Telecom",
-                value: 5,
-            },
-            {
-                name: "Microsoft",
-                value: 6,
             },
         ];
     }

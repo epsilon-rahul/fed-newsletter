@@ -11,6 +11,7 @@ const lead = require('./routes/lead.route');
 const project = require('./routes/project.route');
 const users = require('./routes/users.route');
 const auth = require('./routes/auth.route');
+const events = require('./routes/events.route');
 var cors = require('cors');
 const app = express();
 
@@ -34,6 +35,7 @@ app.use('/api/users', users);
 app.use('/api/auth', auth);
 app.use('/api/project', project);
 app.use('/api/lead', lead);
+app.use('/api/events', events);
 // app.use('/api/platforms', platforms);
 // app.use('/api/properties', properties);
 
