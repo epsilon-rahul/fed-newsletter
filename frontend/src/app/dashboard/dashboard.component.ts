@@ -112,13 +112,13 @@ export class DashboardComponent implements OnInit {
                 if(resp[key].oppStatus == 'RFP Requested'){​​​​
                    this.RFPR.push(resp[key].oppStatus);
                 }​​​​
-                if(resp[key].oppStatus == 'RFP in-progress'){​​​​
+                if(resp[key].oppStatus == 'RFP In Progress'){​​​​
                   this.RFPIP.push(resp[key].oppStatus)
                 }​​​​
-                if(resp[key].oppStatus == 'Proposal submitted'){​​​​
+                if(resp[key].oppStatus == 'Proposal Submitted'){​​​​
                   this.PS.push(resp[key].oppStatus)
                 }​​​​
-                if(resp[key].oppStatus == 'Proposal under Review'){​​​​
+                if(resp[key].oppStatus == 'Proposal Under Review'){​​​​
                   this.PUR.push(resp[key].oppStatus)
                 }​​​​
                 if(resp[key].oppStatus == 'SOW Under Review'){​​​​
@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit {
                 if(resp[key].oppStatus == 'SOW'){​​​​
                   this.SOW.push(resp[key].oppStatus)
                 }​​​​
-                if(resp[key].oppStatus == 'Verbal approval'){​​​​
+                if(resp[key].oppStatus == 'Verbal Approval'){​​​​
                   this.VA.push(resp[key].oppStatus)
                 }​​​​
                 if(resp[key].oppStatus == 'Won'){​​​​
