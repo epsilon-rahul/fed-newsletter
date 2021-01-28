@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { MustMatch } from "../../shared/_helpers/custom-validator";
 import { User } from '../user';
@@ -6,6 +6,9 @@ import { UserServiceService } from "../user-service.service";
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { SelectItem } from 'primeng/api';
+import { ProjectService } from "../../project/project.service";
+import jsPDF from 'jspdf';
+
 
 @Component({
   selector: "app-admin-dashboard",
@@ -14,6 +17,7 @@ import { SelectItem } from 'primeng/api';
 })
 
 export class AdminDashboardComponent implements OnInit {
+  @ViewChild('pdfData', {static: false}) pdfData:ElementRef;
   userDialog: boolean;
   userList: User[];
   user: User;
@@ -22,12 +26,15 @@ export class AdminDashboardComponent implements OnInit {
   submitted: boolean;
   errorMsg;
   clonedUsers: { [s: string]: User; } = {};
+  @Input() projectsList: any;
+
 
   constructor(
     private fb: FormBuilder,
     public userService: UserServiceService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    public projectService: ProjectService,
   ) { }
 
   ngOnInit() {
@@ -44,7 +51,7 @@ export class AdminDashboardComponent implements OnInit {
       {
         label: 'User',
         value: 'user'
-      }]
+      }];
   }
 
   /**
@@ -167,5 +174,28 @@ export class AdminDashboardComponent implements OnInit {
         this.user = {};
       }
     });
+  }
+
+  /**
+  * @description Generate PDF
+  */
+  public generateDPF():void {
+    this.projectService.list("").subscribe(
+      (resp) => {
+        let htmlData = this.pdfData.nativeElement;
+        this.projectsList = resp;
+        let doc = new jsPDF('p','pt', 'a4');
+        doc.html(htmlData.innerHTML, {
+          callback: function (doc) {
+            doc.save('newsletter.pdf');
+          },
+          x:20,
+          y:10
+        });
+      },
+      (err) => {
+          console.log(err);
+      }
+    )
   }
 }
