@@ -44,6 +44,24 @@ export class DashboardComponent implements OnInit {
     };
     cardColor: string = "#232837";
 
+      RFPR = [];
+      RFPIP = [];
+      PS = [];
+      PUR = [];
+      SOWUR = [];
+      SOW = [];
+      VA = [];
+      WON = [];
+      BD = [];
+      PNS  = [];
+      CLOSED = [];
+      financial = [];
+      retail = [];
+      media = [];
+      telecom = [];
+      healthcare = [];
+      tnh = [];
+
     opportunity = [];
     data;
 
@@ -66,7 +84,7 @@ export class DashboardComponent implements OnInit {
     this.eventService.getEvents().subscribe(
         (resp) => {
           if(Array.isArray(resp)){
-            //resp.reverse();
+            resp.reverse();
             this.eventSlide1 = resp.slice(0, 3);
             this.eventSlide2 = resp.slice(3,6);
           }            
@@ -77,20 +95,68 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  
+
   getOpportunityCount() {
     this.projectService.list("").subscribe(
         (resp) => {
-            console.log(resp);
             if (resp){
-
               Object.keys(resp).forEach(key => {​​
+                console.log(resp[key]);
+                if(resp[key].oppStatus == 'RFP Requested'){​​​​
+                   this.RFPR.push(resp[key].oppStatus);
+                }​​​​
+                if(resp[key].oppStatus == 'RFP in-progress'){​​​​
+                  this.RFPIP.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].oppStatus == 'Proposal submitted'){​​​​
+                  this.PS.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].oppStatus == 'Proposal under Review'){​​​​
+                  this.PUR.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].oppStatus == 'SOW Under Review'){​​​​
+                  this.SOWUR.push(resp[key].oppStatus)
+                }​​​​
                 if(resp[key].oppStatus == 'SOW'){​​​​
-                  this.opportunity.push(resp[key])
+                  this.SOW.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].oppStatus == 'Verbal approval'){​​​​
+                  this.VA.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].oppStatus == 'Won'){​​​​
+                  this.WON.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].oppStatus == 'Business Development'){​​​​
+                  this.BD.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].oppStatus == 'Proposal not shortlisted'){​​​​
+                  this.PNS.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].oppStatus == 'Closed'){​​​​
+                  this.CLOSED.push(resp[key].oppStatus)
+                }​​​​
+                if(resp[key].domain == 'Financial'){​​​​
+                  this.financial.push(resp[key].domain)
+                }​​​​
+                if(resp[key].domain == 'Media'){​​​​
+                  this.media.push(resp[key].domain)
+                }​​​​
+                if(resp[key].domain == 'Healthcare'){​​​​
+                  this.healthcare.push(resp[key].domain)
+                }​​​​
+                if(resp[key].domain == 'Telecom'){​​​​
+                  this.telecom.push(resp[key].domain)
+                }​​​​
+                if(resp[key].domain == 'Retail'){​​​​
+                  this.retail.push(resp[key].domain)
+                }​​​​
+                if(resp[key].domain == 'Travel & Hospitality'){​​​​
+                  this.tnh.push(resp[key].domain)
                 }​​​​
             }​​);
             }
             this.renderChart()
-            console.log(this.opportunity.length);
         },
         (err) => {
             console.log(err);
@@ -103,75 +169,75 @@ renderChart(){
 
     this.first = [
         {
-            name: "RFP requested",
-            value: 8940000,
+            name: "RFP Requested",
+            value: this.RFPR.length,
         },
         {
             name: "RFP in-progress",
-            value: 5000000,
+            value: this.RFPIP.length,
         },
         {
             name: "Proposal submitted",
-            value: 7200000,
+            value: this.PS.length,
         },
         {
-            name: "Proposal under Review ",
-            value: 5200000,
+            name: "Proposal under Review",
+            value: this.PUR.length,
         },
         {
             name: "SOW under Review",
-            value: 7700000,
+            value: this.SOWUR.length,
         },
         {
             name: "SOW",
-            value: this.opportunity.length,
+            value: this.SOW.length,
         },
         {
             name: "Verbal approval",
-            value: 4300000,
+            value: this.VA.length,
         },
         {
             name: "Won",
-            value: 4300000,
+            value: this.WON.length,
         },
         {
             name: "Business Development",
-            value: 4300000,
+            value: this.BD.length,
         },
         {
             name: "Proposal not shortlisted",
-            value: 4300000,
+            value: this.PNS.length,
         },
         {
             name: "Closed",
-            value: 4300000,
+            value: this.CLOSED.length,
         },
     ];
 
     this.two = [
         {
             name: "Financial",
-            value: 8940000,
+            value: this.financial.length,
         },
         {
             name: "Retail",
-            value: 5000000,
+            value: this.retail.length,
         },
         {
             name: "Media",
-            value: 7200000,
+            value: this.media.length,
         },
         {
             name: "Healthcare",
-            value: 5200000,
+            value: this.healthcare.length,
         },
         {
             name: "Telecom",
-            value: 7700000,
+            value: this.telecom.length,
         },
         {
             name: "Travel & Hospitality",
-            value: 4300000,
+            value: this.tnh.length,
         },
     ];
     this.three = [
