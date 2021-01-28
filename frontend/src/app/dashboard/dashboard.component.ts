@@ -61,6 +61,12 @@ export class DashboardComponent implements OnInit {
       telecom = [];
       healthcare = [];
       tnh = [];
+      samsung = [];
+      microsoft = [];
+      bosch = [];
+      exxon = [];
+      telec = [];
+      citi = [];
 
     opportunity = [];
     data;
@@ -85,7 +91,7 @@ export class DashboardComponent implements OnInit {
         (resp) => {
           if(Array.isArray(resp)){
             resp.reverse();
-            this.eventSlide1 = resp.slice(0, 3);
+            this.eventSlide1 = resp.slice(0,3);
             this.eventSlide2 = resp.slice(3,6);
           }            
         },
@@ -153,6 +159,24 @@ export class DashboardComponent implements OnInit {
                 }​​​​
                 if(resp[key].domain == 'Travel & Hospitality'){​​​​
                   this.tnh.push(resp[key].domain)
+                }​​​​
+                if(resp[key].clientName == 'Samsung'){​​​​
+                  this.samsung.push(resp[key].clientName)
+                }​​​​
+                if(resp[key].clientName == 'Microsoft'){​​​​
+                  this.microsoft.push(resp[key].clientName)
+                }​​​​
+                if(resp[key].clientName == 'Citi'){​​​​
+                  this.citi.push(resp[key].clientName)
+                }​​​​
+                if(resp[key].clientName == 'Telecom'){​​​​
+                  this.telec.push(resp[key].clientName)
+                }​​​​
+                if(resp[key].clientName == 'Exxon'){​​​​
+                  this.exxon.push(resp[key].clientName)
+                }​​​​
+                if(resp[key].clientName == 'Bosch'){​​​​
+                  this.bosch.push(resp[key].clientName)
                 }​​​​
             }​​);
             }
@@ -243,27 +267,27 @@ renderChart(){
     this.three = [
         {
             name: "Samsung",
-            value: 1,
+            value: this.samsung.length,
         },
         {
             name: "Bosch",
-            value: 2,
+            value: this.bosch.length,
         },
         {
             name: "Exxon",
-            value: 3,
+            value: this.exxon.length,
         },
         {
             name: "Citi",
-            value: 4,
+            value: this.citi.length,
         },
         {
             name: "Telecom",
-            value: 5,
+            value: this.telec.length,
         },
         {
             name: "Microsoft",
-            value: 6,
+            value: this.microsoft.length,
         },
     ];
     this.single = this.first;
