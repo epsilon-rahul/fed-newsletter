@@ -1,6 +1,68 @@
 @import "variables";
 @import "media-tag";
 
-.ngx-charts-outer{
-  width: 100% !important;
+.ngx-charts-outer {
+    width: 100% !important;
+}
+
+.card-counter {
+    box-shadow: 2px 2px 10px #dadada;
+    margin: 5px;
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 120px;
+    border-radius: 5px;
+    transition: 0.3s linear all;
+}
+
+.card-counter:hover {
+    box-shadow: 4px 4px 20px #dadada;
+    transition: 0.3s linear all;
+}
+
+.card-counter.primary {
+    background-color: #ffffff;
+    color: #343a40;
+    border-left: 50px solid #cad1d8;
+    border-radius: 0;
+}
+.card-counter:nth-child(1) {
+    border-left: 50px solid black;
+}
+// .card-counter.primary :first-child {
+//     background-color: #f7f4f4;
+//     color: #343a40;
+//     border-left: 50px solid #17a2b8 !important;
+//     border-radius: 0;
+// }
+
+.card-counter i {
+    font-size: 5em;
+}
+
+.card-counter .count-numbers {
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    font-size: 32px;
+    display: block;
+}
+
+.fa::before {
+    color: #ffffff;
+    font-size: 28px;
+    right: 50px;
+    position: relative;
+    bottom: 10px;
+}
+.card-counter .count-name {
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    text-transform: capitalize;
+    opacity: 0.5;
+    display: block;
+    font-size: 14px;
+    color: #080808;
+    font-weight: 600;
 }

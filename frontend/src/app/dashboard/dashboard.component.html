@@ -163,7 +163,21 @@
     </div>
 
     <div class="mt-5">
-        <ngx-charts-number-card
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3" *ngFor="let val of single">
+                    <div
+                        class="card-counter primary"
+                        [style.border-left]="'50px solid ' + val.color"
+                    >
+                        <i class="{{ val.fonts }}"></i>
+                        <span class="count-numbers">{{ val.value }}</span>
+                        <span class="count-name">{{ val.name }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <ngx-charts-number-card
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
@@ -171,7 +185,7 @@
             (select)="onSelect($event)"
             [innerPadding]="10"
         >
-        </ngx-charts-number-card>
+        </ngx-charts-number-card> -->
         <div class="clearfix"></div>
     </div>
 

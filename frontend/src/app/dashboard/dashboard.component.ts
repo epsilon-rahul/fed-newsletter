@@ -47,48 +47,53 @@ export class DashboardComponent implements OnInit {
 
         this.first = [
             {
+                name: "Won",
+                value: 43,
+                color: "#28a745",
+                fonts: "fa fa-trophy",
+            },
+            {
                 name: "RFP requested",
-                value: 8940000,
+                value: 89,
+                color: "#8e24aa",
+                fonts: "fa fa-hand-pointer",
             },
             {
                 name: "RFP in-progress",
-                value: 5000000,
+                value: 50,
+                color: "#17a2b8",
+                fonts: "fa fa-spinner",
             },
+
             {
                 name: "Proposal submitted",
-                value: 7200000,
+                value: 72,
+                color: "#ffc107",
+                fonts: "fa fa-hand-pointer-o",
             },
             {
                 name: "Proposal under Review ",
-                value: 5200000,
+                value: 52,
+                color: "#dc3545",
+                fonts: "fa fa-commenting-o",
             },
             {
                 name: "SOW under Review",
-                value: 7700000,
+                value: 77,
+                color: "#00c0ef",
+                fonts: "fa fa-commenting-o",
             },
             {
                 name: "SOW",
-                value: 4300000,
+                value: 43,
+                color: "#007bff",
+                fonts: "fa fa-briefcase",
             },
             {
                 name: "Verbal approval",
-                value: 4300000,
-            },
-            {
-                name: "Won",
-                value: 4300000,
-            },
-            {
-                name: "Business Development",
-                value: 4300000,
-            },
-            {
-                name: "Proposal not shortlisted",
-                value: 4300000,
-            },
-            {
-                name: "Closed",
-                value: 4300000,
+                value: 43,
+                color: "#fb8c00",
+                fonts: "fa fa-thumbs-o-up",
             },
         ];
 
